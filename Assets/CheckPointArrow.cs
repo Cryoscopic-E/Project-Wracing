@@ -8,7 +8,7 @@ public class CheckPointArrow : MonoBehaviour
     public Transform checkPointArrow;
     public CheckPointTrigger checkPointTrigger;
     float arrowSpeed = 5.0f;
-    // Update is called once per frame
+
     void Update()
     {
         Vector3 checkPointPosition = checkPointTrigger.GetCurrentTargetCheckPoint().transform.position;
