@@ -6,6 +6,8 @@ public class Item : MonoBehaviour
 {
     bool oneShot = true;
     protected float duration = 3.0f;
+    private float lifeTime = 10f;
+    bool destroy = false;
     bool activated = false;
     public GameObject projectilePrefab;
 
@@ -28,11 +30,17 @@ public class Item : MonoBehaviour
     {
         activated = true;
         duration = 0;
+        StartCoroutine(StartLifeCountDown());
     }
 
+    IEnumerator StartLifeCountDown()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        destroy = true;
+    }
     void Update()
     {
-        if(activated && duration <= 0)
+        if(activated && duration <= 0 || destroy)
         {
             Destroy(GetComponent<Item>());
         }
