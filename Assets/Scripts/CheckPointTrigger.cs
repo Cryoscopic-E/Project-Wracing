@@ -13,7 +13,7 @@ public class CheckPointTrigger : MonoBehaviour
     private int totalLaps = 3;
     private int lap = 1;
 
-    private void Start()
+    private void Awake()
     {
         checkPoint = checkPoints[currentCheckPointIndex];
         totLapsText.text = totalLaps.ToString();
@@ -37,5 +37,10 @@ public class CheckPointTrigger : MonoBehaviour
                 }
             }
         }
+    }
+
+    public GameObject GetCurrentTargetCheckPoint()
+    {
+        return checkPoint;
     }
 }
