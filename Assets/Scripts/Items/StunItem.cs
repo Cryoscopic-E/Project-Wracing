@@ -6,7 +6,8 @@ public class StunItem : Item
 {
     public override void Activate()
     {
-        
+        GameObject temp = Instantiate(projectilePrefab, transform.position + transform.forward * 20, Quaternion.identity);
+        temp.transform.parent = null;
         base.Activate();
     }
 }
