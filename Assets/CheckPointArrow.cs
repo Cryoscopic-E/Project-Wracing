@@ -7,7 +7,7 @@ public class CheckPointArrow : MonoBehaviour
 
     public Transform checkPointArrow;
     public CheckPointTrigger checkPointTrigger;
-    float speed = 5.0f;
+    float arrowSpeed = 5.0f;
     // Update is called once per frame
     void Update()
     {
@@ -16,7 +16,7 @@ public class CheckPointArrow : MonoBehaviour
         Vector3 targetDirection = checkPointPosition - transform.position;
 
         // The step size is equal to speed times frame time.
-        float singleStep = speed * Time.deltaTime;
+        float singleStep = arrowSpeed * Time.deltaTime;
 
         // Rotate the forward vector towards the target direction by one step
         Vector3 newDirection = Vector3.RotateTowards(checkPointArrow.forward, targetDirection, singleStep, 0.0f);

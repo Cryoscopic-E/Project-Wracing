@@ -91,7 +91,8 @@ public class MovementController : MonoBehaviour
 
         if (acceleration > 0.0f)
         {
-            speed = Mathf.Lerp(speed, canBoost? maxSpeed*2 : maxSpeed, acceleration);
+            speed += acceleration;
+            speed = Mathf.Clamp(speed, 0.1f, canBoost ? maxSpeed * 2 : maxSpeed);
         }
         else
         {
@@ -99,7 +100,7 @@ public class MovementController : MonoBehaviour
         }
         Vector3 movement = transform.forward;
 
-        float rotationOverride = Mathf.Max(0.001f, (speed / maxSpeed));
+        float rotationOverride = Mathf.Max(1.2f, (speed / maxSpeed));
         Vector3 yaw = input.x * transform.right * rotationSpeedX * rotationOverride * Time.deltaTime;
         Vector3 pitch = input.y * transform.up * rotationSpeedY * rotationOverride * Time.deltaTime;
         Vector3 direction = yaw + pitch;
