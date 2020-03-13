@@ -5,8 +5,7 @@ using XInputDotNetPure;
 
 public class CharacterStats : MonoBehaviour
 {
-    public float stunTime;
-    public bool stunned;
+    public bool stunned = false;
 
     public Item currentItem;
     private CharacterController controller;
@@ -15,15 +14,21 @@ public class CharacterStats : MonoBehaviour
     GamePadState state;
     GamePadState prevState;
 
+    GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager.players.Add(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (stunned)
+            return;
+
         // Find a PlayerIndex, for a single player game
         // Will find the first controller that is connected ans use it
         if (!playerIndexSet || !prevState.IsConnected)
@@ -59,6 +64,21 @@ public class CharacterStats : MonoBehaviour
         
     }
 
+    public void Stun(float duration)
+    {
+        Debug.Log("STUN CALLED");
+        if (!stunned)
+        {
+            stunned = true;
+            Invoke("Recover", duration);
+        }
+    }
+
+    void Recover()
+    {
+        stunned = false;
+    }
+
     void UseItem()
     {
         if (currentItem)
@@ -76,7 +96,7 @@ public class CharacterStats : MonoBehaviour
     {
         if (other.CompareTag("Item") && currentItem == null)
         {
-            other.GetComponent<Item>().RandomItemSelector(gameObject, 10);
+            other.GetComponent<Item>().RandomItemSelector(gameObject, 0);
         }
     }
 }
