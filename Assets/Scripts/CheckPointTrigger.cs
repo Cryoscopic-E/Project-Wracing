@@ -1,20 +1,27 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CheckPointTrigger : MonoBehaviour
 {
-    public GameObject[] checkPoints;
+    
     public Text lapText;
     public Text totLapsText;
+    
 
-
+    private List<GameObject> checkPoints;
     private GameObject checkPoint;
     private int currentCheckPointIndex = 0;
     private int totalLaps = 3;
     private int lap = 1;
 
-    private void Start()
+    private void Awake()
     {
+        checkPoints = new List<GameObject>();
+        foreach(Transform t in GameObject.Find("CheckPoints").transform)
+        {
+            checkPoints.Add(t.gameObject);
+        }
         checkPoint = checkPoints[currentCheckPointIndex];
         totLapsText.text = totalLaps.ToString();
         lapText.text = lap.ToString();
@@ -27,7 +34,7 @@ public class CheckPointTrigger : MonoBehaviour
             {
                 currentCheckPointIndex++;
 
-                currentCheckPointIndex %= checkPoints.Length;
+                currentCheckPointIndex %= checkPoints.Count;
                 checkPoint = checkPoints[currentCheckPointIndex];
 
                 if (currentCheckPointIndex == 0)
@@ -37,5 +44,10 @@ public class CheckPointTrigger : MonoBehaviour
                 }
             }
         }
+    }
+
+    public GameObject GetCurrentTargetCheckPoint()
+    {
+        return checkPoint;
     }
 }
