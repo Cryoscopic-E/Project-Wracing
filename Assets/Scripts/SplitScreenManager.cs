@@ -12,9 +12,10 @@ public class SplitScreenManager : MonoBehaviour
     GameObject canvas;
     int numOfPlayers;
 
-    void Start()
+    public void CheckForPlayers()
     {
         canvas = GameObject.Find("Canvas");
+
         for(int i = 0; i < gameObject.transform.childCount; i++)
         {
             cameras.Add(gameObject.transform.GetChild(i).gameObject);

@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
     public Transform desiredPosition;
     public Transform lookAtPosition;
 
-    void Start()
+    void Awake()
     {
         transform.parent = null;
         if (GameObject.Find("Cameras").transform)
