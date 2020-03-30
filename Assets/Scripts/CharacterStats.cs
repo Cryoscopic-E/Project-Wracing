@@ -96,7 +96,7 @@ public class CharacterStats : MonoBehaviour
     {
         if (other.CompareTag("Item") && currentItem == null)
         {
-            other.GetComponent<Item>().RandomItemSelector(gameObject, 0);
+            other.GetComponent<Item>().RandomItemSelector(gameObject, 5);
         }
     }
 }

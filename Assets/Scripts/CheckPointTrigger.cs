@@ -17,14 +17,14 @@ public class CheckPointTrigger : MonoBehaviour
 
     private void Awake()
     {
-        checkPoints = new List<GameObject>();
-        foreach(Transform t in GameObject.Find("CheckPoints").transform)
-        {
-            checkPoints.Add(t.gameObject);
-        }
-        checkPoint = checkPoints[currentCheckPointIndex];
-        totLapsText.text = totalLaps.ToString();
-        lapText.text = lap.ToString();
+        //checkPoints = new List<GameObject>();
+        //foreach(Transform t in GameObject.Find("CheckPoints").transform)
+        //{
+        //    checkPoints.Add(t.gameObject);
+        //}
+        //checkPoint = checkPoints[currentCheckPointIndex];
+        //totLapsText.text = totalLaps.ToString();
+        //lapText.text = lap.ToString();
     }
     private void OnTriggerEnter(Collider other)
     {

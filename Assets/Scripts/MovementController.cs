@@ -22,6 +22,7 @@ public class MovementController : MonoBehaviour
 
     public float acceleration;
     bool playerIndexSet = false;
+    public PlayerIndex player;
     PlayerIndex playerIndex;
     GamePadState state;
     GamePadState prevState;
@@ -79,13 +80,15 @@ public class MovementController : MonoBehaviour
             }
         }
 
-        // check inputs and set direction
-        CheckInputs();
+
 
         // move
 
         prevState = state;
-        state = GamePad.GetState(playerIndex);
+        state = GamePad.GetState(player);
+
+        // check inputs and set direction
+        CheckInputs();
 
         acceleration = state.Triggers.Right * accellerationMultiplier;
 
@@ -123,9 +126,9 @@ public class MovementController : MonoBehaviour
 
     private void CheckInputs()
     {
-
-        input.x = Input.GetAxis("Horizontal");
-        input.y = -Input.GetAxis("Vertical");
+        
+        input.x = state.ThumbSticks.Left.X;
+        input.y = -state.ThumbSticks.Left.Y;
     }
 
     public void GetBoost(float seconds)
