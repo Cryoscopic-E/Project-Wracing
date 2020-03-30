@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d2bf4c2bb9b8f45a47dae46f97535b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkPointArrow: {fileID: 0}
+  checkPointArrow: {fileID: 7942887368794293457}
   checkPointTrigger: {fileID: 6058261837216435648}
 --- !u!1 &6058261836520109555
 GameObject:
