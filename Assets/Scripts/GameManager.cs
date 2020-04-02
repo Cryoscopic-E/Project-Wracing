@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     PlayerIndex playerIndex;
     GamePadState state;
     GamePadState prevState;
+    int currentPlayersListIndex = -1;
+    public List<PlayerIndex> playersList = new List<PlayerIndex>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < 4; ++i)
             {
                 PlayerIndex testPlayerIndex = (PlayerIndex)i;
+                playersList.Add((PlayerIndex)i);
                 GamePadState testState = GamePad.GetState(testPlayerIndex);
                 if (testState.IsConnected)
                 {
@@ -46,9 +50,9 @@ public class GameManager : MonoBehaviour
         splitScreenManager.CheckForPlayers();
     }
 
-    // Update is called once per frame
-    void Update()
+    public PlayerIndex GetCurrentPlayerIndex()
     {
-        
+        currentPlayersListIndex++;
+        return playersList[currentPlayersListIndex];
     }
 }

@@ -30,18 +30,27 @@ public class MovementController : MonoBehaviour
     bool canBoost = false;
     float boostTime;
     float boostTimer = 0.0f;
+    CharacterStats stats;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
-
+        stats = GetComponent<CharacterStats>();
       
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (stats.stunned)
+        {
+            canBoost = false;
+            boostTimer = 0.0f;
+            boostTime = 0.0f;
+            return;
+        }
+
         // boost timer
         if (canBoost)
         {
@@ -51,6 +60,7 @@ public class MovementController : MonoBehaviour
                 print("BOOST DEACTIVATED");
                 canBoost = false;
                 boostTimer = 0.0f;
+                boostTime = 0.0f;
             }
         }
             
@@ -73,7 +83,7 @@ public class MovementController : MonoBehaviour
                 GamePadState testState = GamePad.GetState(testPlayerIndex);
                 if (testState.IsConnected)
                 {
-                    Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
+                  //  Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
                     playerIndex = testPlayerIndex;
                     playerIndexSet = true;
                 }
