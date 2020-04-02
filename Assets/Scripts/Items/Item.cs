@@ -17,11 +17,13 @@ public class Item : MonoBehaviour
         if(selector < chanceForBoost)
         {
            player.GetComponent<CharacterStats>().currentItem =  player.AddComponent<BoostItem>();
+            player.GetComponent<CharacterStats>().boostImage.SetActive(true);
         }
         else
         {
             player.GetComponent<CharacterStats>().currentItem = player.AddComponent<StunItem>();
             player.GetComponent<CharacterStats>().currentItem.projectilePrefab = projectilePrefab;
+            player.GetComponent<CharacterStats>().attackImage.SetActive(true);
         }
         Destroy(gameObject);
     }
