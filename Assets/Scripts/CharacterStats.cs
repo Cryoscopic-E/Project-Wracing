@@ -6,7 +6,8 @@ using XInputDotNetPure;
 public class CharacterStats : MonoBehaviour
 {
     public bool stunned = false;
-
+    public GameObject boostImage;
+    public GameObject attackImage;
     public Item currentItem;
     private CharacterController controller;
     bool playerIndexSet = false;
@@ -21,6 +22,7 @@ public class CharacterStats : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         gameManager.players.Add(gameObject);
+        playerIndex = gameManager.GetCurrentPlayerIndex();
     }
 
     // Update is called once per frame
@@ -39,30 +41,27 @@ public class CharacterStats : MonoBehaviour
                 GamePadState testState = GamePad.GetState(testPlayerIndex);
                 if (testState.IsConnected)
                 {
-                    Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
-                    playerIndex = testPlayerIndex;
+                    //Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
+                   // playerIndex = testPlayerIndex;
                     playerIndexSet = true;
-                    CheckInputs();
                 }
             }
         }
 
-        prevState = state;
+        //prevState = state;
         state = GamePad.GetState(playerIndex);
 
         // Detect if a button was pressed this frame
         if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
+           // Debug.Log("Pressed A button + " + playerIndex);
             UseItem();
         }
 
 
+        prevState = state;
     }
 
-    private void CheckInputs()
-    {
-        
-    }
 
     public void Stun(float duration)
     {
@@ -83,8 +82,11 @@ public class CharacterStats : MonoBehaviour
     {
         if (currentItem)
         {
+            Debug.Log("ITEM Activated");
             currentItem.Activate();
             currentItem = null;
+            boostImage.SetActive(false);
+            attackImage.SetActive(false);
         }
         else
         {
