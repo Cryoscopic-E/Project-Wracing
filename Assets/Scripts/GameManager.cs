@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
                 GamePadState testState = GamePad.GetState(testPlayerIndex);
                 if (testState.IsConnected)
                 {
-                    GameObject temp = Instantiate(playerPrefab, startPosition + new Vector3(x,0,0), Quaternion.identity);
+                    GameObject temp = Instantiate(playerPrefab, startPosition + new Vector3(x,0,0), Quaternion.Euler(0.0f, 180.0f,0.0f));
                     temp.GetComponent<MovementController>().player = testPlayerIndex;
                     x += 5;
                 }
