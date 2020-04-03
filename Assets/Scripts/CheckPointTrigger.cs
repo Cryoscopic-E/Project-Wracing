@@ -14,23 +14,23 @@ public class CheckPointTrigger : MonoBehaviour
     private int currentCheckPointIndex = 0;
     private int totalLaps = 3;
     private int lap = 1;
-
+    
     private void Awake()
     {
-        //checkPoints = new List<GameObject>();
-        //foreach(Transform t in GameObject.Find("CheckPoints").transform)
-        //{
-        //    checkPoints.Add(t.gameObject);
-        //}
-        //checkPoint = checkPoints[currentCheckPointIndex];
-        //totLapsText.text = totalLaps.ToString();
-        //lapText.text = lap.ToString();
+        checkPoints = new List<GameObject>();
+        foreach(Transform t in GameObject.Find("CheckPoints").transform)
+        {
+            checkPoints.Add(t.Find("center").gameObject);
+        }
+        checkPoint = checkPoints[currentCheckPointIndex];
+        totLapsText.text = totalLaps.ToString();
+        lapText.text = lap.ToString();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CheckPoint"))
         {
-            if (other.gameObject == checkPoint)
+            if (other.gameObject.transform.Find("center").gameObject == checkPoint)
             {
                 currentCheckPointIndex++;
 

@@ -68,7 +68,7 @@ public class MovementController : MonoBehaviour
         
         
 
-        if(transform.position.y > 90.0f)
+        if(transform.position.y > 120.0f)
         {
             print("out");
         }
@@ -130,7 +130,7 @@ public class MovementController : MonoBehaviour
 
         //clamp y position
         Vector3 position = transform.position;
-        position.y = Mathf.Clamp(position.y, 0.0f, 90.0f);
+        position.y = Mathf.Clamp(position.y, 0.0f, 120.0f);
         transform.position = position;
     }
 
