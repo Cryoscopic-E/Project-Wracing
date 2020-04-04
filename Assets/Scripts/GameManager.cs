@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
     int currentPlayersListIndex = -1;
     public List<PlayerIndex> playersList = new List<PlayerIndex>();
 
+    void Awake()
+    {
+        Screen.SetResolution(1024, 768, true);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

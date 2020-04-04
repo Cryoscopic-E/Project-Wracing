@@ -14,6 +14,11 @@ public class MenuManager : MonoBehaviour
     public int controllers;
     public Text text;
     UnityEngine.UI.Button startButton;
+    
+    void Awake()
+    {
+        Screen.SetResolution(1024, 768, true);
+    }
     void Start()
     {
         startButton = GameObject.Find("Start Button").GetComponent<UnityEngine.UI.Button>();
