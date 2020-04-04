@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
+using UnityEngine.SceneManagement;
+
 public class MovementController : MonoBehaviour
 {
 
@@ -43,6 +45,11 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Restart"))
+        {
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        }
+
         if (stats.stunned)
         {
             canBoost = false;
