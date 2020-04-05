@@ -14,10 +14,12 @@ public class CheckPointTrigger : MonoBehaviour
     private int currentCheckPointIndex = 0;
     private int totalLaps = 3;
     private int lap = 1;
+    private GameManager gameManager;
     
     private void Awake()
     {
         checkPoints = new List<GameObject>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         foreach(Transform t in GameObject.Find("CheckPoints").transform)
         {
             checkPoints.Add(t.Find("center").gameObject);
@@ -41,6 +43,10 @@ public class CheckPointTrigger : MonoBehaviour
                 {
                     lap++;
                     lapText.text = lap.ToString();
+                }
+                if(lap > totalLaps)
+                {
+                    gameManager.EndGame(GetComponent<CharacterStats>().ReturnPlayerIndex());
                 }
             }
         }

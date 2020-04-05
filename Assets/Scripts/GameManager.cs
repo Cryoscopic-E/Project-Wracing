@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using XInputDotNetPure;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> players;
     public GameObject playerPrefab;
     public Transform startPositionObject;
+    public Image winScreen;
+    bool won = false;
     Vector3 startPosition;
     public SplitScreenManager splitScreenManager;
 
@@ -61,11 +64,27 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
+
+        if (won)
+        {
+            winScreen.color = new Color(winScreen.color.r, winScreen.color.g,winScreen.color.b, winScreen.color.a + 0.2f * Time.deltaTime);
+        }
     }
 
         public PlayerIndex GetCurrentPlayerIndex()
     {
         currentPlayersListIndex++;
         return playersList[currentPlayersListIndex];
+    }
+
+    public void EndGame(string p)
+    {
+        won = true;
+        winScreen.transform.SetAsLastSibling();
+        winScreen.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Player " + p+ " has won" + " \n" + "Press esc to restart";
+        foreach(GameObject x in players)
+        {
+            x.SetActive(false);
+        }
     }
 }

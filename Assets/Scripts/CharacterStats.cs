@@ -124,4 +124,9 @@ public class CharacterStats : MonoBehaviour
             other.GetComponent<Item>().RandomItemSelector(gameObject, 5);
         }
     }
+
+    public string ReturnPlayerIndex()
+    {
+        return playerIndex.ToString();
+    }
 }
