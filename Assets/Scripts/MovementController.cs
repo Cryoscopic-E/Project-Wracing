@@ -15,7 +15,7 @@ public class MovementController : MonoBehaviour
 
     private Vector2 input;
 
-    private float speed = 0.0f;
+    public float speed = 0.0f;
 
     //float rotationSpeedX = 25.0f;
     //float rotationSpeedY = 15.5f;

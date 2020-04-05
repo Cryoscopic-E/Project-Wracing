@@ -42,6 +42,7 @@ public class Item : MonoBehaviour
     }
     void Update()
     {
+        if(!activated)transform.GetChild(0).Rotate(new Vector3(2, 0, 0));
         if(activated && duration <= 0 || destroy)
         {
             Destroy(GetComponent<Item>());

@@ -14,15 +14,21 @@ public class CharacterStats : MonoBehaviour
     PlayerIndex playerIndex;
     GamePadState state;
     GamePadState prevState;
+    public MovementController movementController;
 
     GameManager gameManager;
+    public AudioClip[] sounds;
+    public AudioSource source;
+    public AudioSource broomSource;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        movementController = GetComponent<MovementController>();
         gameManager.players.Add(gameObject);
         playerIndex = gameManager.GetCurrentPlayerIndex();
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,6 +36,17 @@ public class CharacterStats : MonoBehaviour
     {
         if (stunned)
             return;
+        Debug.Log(movementController.speed);
+
+        if (movementController.speed > 1)
+        {
+            if(!broomSource.isPlaying) 
+                broomSource.Play();
+        }
+        else
+        {
+            broomSource.Stop();
+        }
 
         // Find a PlayerIndex, for a single player game
         // Will find the first controller that is connected ans use it
@@ -69,6 +86,8 @@ public class CharacterStats : MonoBehaviour
         if (!stunned)
         {
             stunned = true;
+            source.clip = sounds[0];
+            source.Play();
             Invoke("Recover", duration);
         }
     }
@@ -83,6 +102,8 @@ public class CharacterStats : MonoBehaviour
         if (currentItem)
         {
             Debug.Log("ITEM Activated");
+            source.clip = sounds[2];
+            source.Play();
             currentItem.Activate();
             currentItem = null;
             boostImage.SetActive(false);
@@ -98,6 +119,8 @@ public class CharacterStats : MonoBehaviour
     {
         if (other.CompareTag("Item") && currentItem == null)
         {
+            source.clip = sounds[1];
+            source.Play();
             other.GetComponent<Item>().RandomItemSelector(gameObject, 5);
         }
     }
