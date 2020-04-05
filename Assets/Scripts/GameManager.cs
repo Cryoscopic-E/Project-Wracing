@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using XInputDotNetPure;
 
 public class GameManager : MonoBehaviour
@@ -54,8 +55,15 @@ public class GameManager : MonoBehaviour
         
         splitScreenManager.CheckForPlayers();
     }
+    void Update()
+    {
+        if (Input.GetButtonDown("Restart") || Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        }
+    }
 
-    public PlayerIndex GetCurrentPlayerIndex()
+        public PlayerIndex GetCurrentPlayerIndex()
     {
         currentPlayersListIndex++;
         return playersList[currentPlayersListIndex];

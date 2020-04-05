@@ -45,7 +45,7 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Restart"))
+        if (Input.GetButtonDown("Restart") || Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
